@@ -1,27 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 namespace HTNWIC.Player
 {
     [RequireComponent(typeof(Animator))]
-    public class PlayerAnimations : MonoBehaviour
+    [RequireComponent(typeof(NetworkAnimator))]
+    public class PlayerAnimations : NetworkBehaviour
     {
-        private Animator animator;
+        private NetworkAnimator networkAnimator;
 
         private void Start()
         {
-            animator = GetComponent<Animator>();
+            if (!isLocalPlayer) return;
+            networkAnimator = GetComponent<NetworkAnimator>();
+            if (networkAnimator == null)
+            {
+                Debug.LogError("NetworkAnimator component not found on this object");
+            }
         }
 
         public void PlayRunAnimation()
         {
-            animator.SetTrigger("Run");
+            networkAnimator.SetTrigger("Run");
         }
 
         public void PlayIdleAnimation()
         {
-            animator.SetTrigger("Idle");
+            networkAnimator.SetTrigger("Idle");
         }
     }
 }

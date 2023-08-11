@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 namespace HTNWIC.Player
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerMotor : MonoBehaviour
+    public class PlayerMotor : NetworkBehaviour
     {
         private Rigidbody rb;
 
@@ -14,6 +15,7 @@ namespace HTNWIC.Player
 
         private void Start()
         {
+            if (!isLocalPlayer) return;
             rb = GetComponent<Rigidbody>();
         }
 

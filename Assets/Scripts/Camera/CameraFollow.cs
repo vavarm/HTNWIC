@@ -6,8 +6,12 @@ namespace HTNWIC.Camera
 {
     public class CameraFollow : MonoBehaviour
     {
-        [SerializeField]
         private Transform target;
+        public Transform Target
+        {
+            get { return target; }
+            set { target = value; }
+        }
         [SerializeField]
         private float offsetHeight = 10f;
         [SerializeField]
