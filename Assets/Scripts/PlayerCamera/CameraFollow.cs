@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HTNWIC.Camera
+namespace HTNWIC.PlayerCamera
 {
     public class CameraFollow : MonoBehaviour
     {
