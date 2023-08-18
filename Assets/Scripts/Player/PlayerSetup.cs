@@ -11,6 +11,11 @@ public class PlayerSetup : NetworkBehaviour
     private Camera sceneCamera;
 
     [SerializeField]
+    private string localPlayerLayerName = "LocalPlayer";
+    [SerializeField]
+    private string remotePlayerLayerName = "RemotePlayer";
+
+    [SerializeField]
     private Behaviour[] componentsToDisable;
 
     private void Start()
@@ -19,6 +24,8 @@ public class PlayerSetup : NetworkBehaviour
         {
             // Disable all components that should only be active on the player that we control
             DisableComponents();
+            // Assign the player to the remote player layer
+            AssignRemoteLayer(gameObject);
         }
         else
         {
@@ -40,6 +47,15 @@ public class PlayerSetup : NetworkBehaviour
         foreach (Behaviour component in componentsToDisable)
         {
             component.enabled = false;
+        }
+    }
+
+    private void AssignRemoteLayer(GameObject obj)
+    {
+        obj.layer = LayerMask.NameToLayer(remotePlayerLayerName);
+        foreach (Transform child in obj.transform)
+        {
+            AssignRemoteLayer(child.gameObject);
         }
     }
 
