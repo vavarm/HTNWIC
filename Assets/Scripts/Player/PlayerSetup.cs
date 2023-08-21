@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-using HTNWIC.Camera;
+using HTNWIC.PlayerCamera;
 
 public class PlayerSetup : NetworkBehaviour
 {
