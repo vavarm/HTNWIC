@@ -10,25 +10,18 @@ namespace HTNWIC
     {
         [SerializeField]
         protected float baseHealth = 100f;
+        [SyncVar]
         [SerializeField]
         protected float maxHealth;
+        [SyncVar]
         [SerializeField]
         protected float currentHealth;
 
-        public float BaseHealth
-        {
-            get { return baseHealth; }
-        }
+        public float BaseHealth => baseHealth;
 
-        public float MaxHealth
-        {
-            get { return maxHealth; }
-        }
+        public float MaxHealth => maxHealth;
 
-        public float CurrentHealth
-        {
-            get { return currentHealth; }
-        }
+        public float CurrentHealth => currentHealth;
 
         private void Start()
         {
