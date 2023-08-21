@@ -10,8 +10,10 @@ public class PlayerSetup : NetworkBehaviour
     private Camera playerCamera;
     private Camera sceneCamera;
 
+    /*
     [SerializeField]
     private string localPlayerLayerName = "LocalPlayer";
+    */
     [SerializeField]
     private string remotePlayerLayerName = "RemotePlayer";
 

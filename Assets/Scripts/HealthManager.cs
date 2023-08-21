@@ -8,9 +8,12 @@ namespace HTNWIC
 {
     public abstract class HealthManager : NetworkBehaviour
     {
-        private float baseHealth = 100f;
-        private float maxHealth;
-        private float currentHealth;
+        [SerializeField]
+        protected float baseHealth = 100f;
+        [SerializeField]
+        protected float maxHealth;
+        [SerializeField]
+        protected float currentHealth;
 
         public float BaseHealth
         {
@@ -38,11 +41,10 @@ namespace HTNWIC
             if (isServer && Input.GetKeyDown(KeyCode.K))
             {
                 TakeDamage(10f);
-                Debug.Log("Took 10 damage inflict by the server");
             }
         }
 
-        public void TakeDamage(float amount)
+        public virtual void TakeDamage(float amount)
         {
             currentHealth -= amount;
             if (currentHealth <= 0)
@@ -53,6 +55,5 @@ namespace HTNWIC
         }
 
         protected abstract void Die();
-
     }
 }
