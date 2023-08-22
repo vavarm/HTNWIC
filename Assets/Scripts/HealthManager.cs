@@ -23,7 +23,7 @@ namespace HTNWIC
 
         public float CurrentHealth => currentHealth;
 
-        private void Start()
+        protected virtual void Start()
         {
             maxHealth = baseHealth;
             currentHealth = maxHealth;
