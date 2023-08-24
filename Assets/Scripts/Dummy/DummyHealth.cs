@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using HTNWIC;
 using UnityEngine;
+using Mirror;
 
 namespace HTNWIC.Dummy
 {
@@ -24,6 +25,7 @@ namespace HTNWIC.Dummy
             Destroy(gameObject);
         }
 
+        [Server]
         public override void TakeDamage(float amount)
         {
             base.TakeDamage(amount);
