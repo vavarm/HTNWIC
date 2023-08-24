@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace HTNWIC
 {
-    public abstract class HealthManager : NetworkBehaviour
+    public abstract class HealthManager : NetworkBehaviour, IDamageable
     {
         [SerializeField]
         protected float baseHealth = 100f;
@@ -23,7 +23,7 @@ namespace HTNWIC
 
         public float CurrentHealth => currentHealth;
 
-        private void Start()
+        protected virtual void Start()
         {
             maxHealth = baseHealth;
             currentHealth = maxHealth;
@@ -37,6 +37,7 @@ namespace HTNWIC
             }
         }
 
+        [Server]
         public virtual void TakeDamage(float amount)
         {
             currentHealth -= amount;

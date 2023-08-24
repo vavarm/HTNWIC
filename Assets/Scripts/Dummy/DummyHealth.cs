@@ -2,18 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using HTNWIC;
 using UnityEngine;
+using Mirror;
 
-public class DummyHealth : HealthManager
+namespace HTNWIC.Dummy
 {
-    protected override void Die()
+    [RequireComponent(typeof(DummyHealthBar))]
+    public class DummyHealth : HealthManager
     {
-        Debug.Log($"Dummy no.{gameObject.GetInstanceID()} has died");
-        Destroy(gameObject);
-    }
+        [SerializeField]
+        private DummyHealthBar healthBar;
 
-    public override void TakeDamage(float amount)
-    {
-        base.TakeDamage(amount);
-        if (CurrentHealth > 0) Debug.Log($"Dummy no.{gameObject.GetInstanceID()} has taken {amount} damage. He has {CurrentHealth} health left");
+        protected override void Start()
+        {
+            base.Start();
+            healthBar = GetComponent<DummyHealthBar>();
+            healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
+        }
+
+        protected override void Die()
+        {
+            Debug.Log($"Dummy no.{gameObject.GetInstanceID()} has died");
+            Destroy(gameObject);
+        }
+
+        [Server]
+        public override void TakeDamage(float amount)
+        {
+            base.TakeDamage(amount);
+            if (!isServer) return;
+            healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
+            if (CurrentHealth > 0) Debug.Log($"Dummy no.{gameObject.GetInstanceID()} has taken {amount} damage. He has {CurrentHealth} health left");
+        }
     }
 }
