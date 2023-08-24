@@ -29,14 +29,6 @@ namespace HTNWIC
             currentHealth = maxHealth;
         }
 
-        private void Update()
-        {
-            if (isServer && Input.GetKeyDown(KeyCode.K))
-            {
-                TakeDamage(10f);
-            }
-        }
-
         [Server]
         public virtual void TakeDamage(float amount)
         {
@@ -45,6 +37,17 @@ namespace HTNWIC
             {
                 currentHealth = 0;
                 Die();
+            }
+        }
+
+        public abstract void TakeDamage(DamageData damageData);
+
+        public virtual void Heal(float amount)
+        {
+            currentHealth += amount;
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
             }
         }
 
