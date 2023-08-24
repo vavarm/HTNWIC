@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using HTNWIC.PlayerCamera;
-using Mirror.Examples.AdditiveLevels;
 
 namespace HTNWIC.Player
 {
