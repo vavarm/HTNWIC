@@ -23,9 +23,16 @@ namespace HTNWIC.Dummy
         private void Update()
         {
             // make sure the health bar is always facing the camera
-            Transform targetCamera = Camera.allCameras[0].transform;
-            Vector3 targetPosition = new Vector3(targetCamera.position.x, healthBarCanvas.transform.position.y, targetCamera.position.z);
-            healthBarCanvas.transform.LookAt(targetPosition);
+            Transform targetCamera;
+            if (Camera.main != null)
+            {
+                targetCamera = Camera.main.transform;
+            }
+            else
+            {
+                targetCamera = GameObject.FindGameObjectsWithTag("PlayerCamera")[0].transform;
+            }
+            healthBarCanvas.transform.LookAt(transform.position + targetCamera.rotation * Vector3.forward, targetCamera.rotation * Vector3.up);
         }
 
         [Server]
