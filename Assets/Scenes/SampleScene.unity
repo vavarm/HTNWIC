@@ -518,6 +518,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1389452172
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1156533248529043307, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156533248529043307, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156533248529043307, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156533248529043307, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156533248529043307, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156533248529043307, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156533248529043307, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156533248529043307, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156533248529043307, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156533248529043307, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965544642312197585, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: m_Name
+      value: Pickable_Sword (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314028728464528145, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: sceneId
+      value: 789987648
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d4903a2d52053754d9400ac749a56965, type: 3}
 --- !u!1 &1876538567
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,3 +711,4 @@ SceneRoots:
   - {fileID: 208652890}
   - {fileID: 943652253}
   - {fileID: 1876538570}
+  - {fileID: 1389452172}
