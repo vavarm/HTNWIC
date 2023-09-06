@@ -732,6 +732,7 @@ PlayerSettings:
     Build: 0
     Collab: 0
     Game Performance: 0
+    Legacy Analytics: 0
     Purchasing: 0
     UDP: 0
     UNet: 1
@@ -755,7 +756,7 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 73a88cf7-07b6-499e-83e9-2cac3bedea38
+  cloudProjectId: 202a118a-af74-4b01-ba5b-55272e1b1eb4
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: HTNWIC

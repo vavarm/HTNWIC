@@ -12,8 +12,12 @@ namespace HTNWIC.Player
         private Camera playerCamera;
         private Camera sceneCamera;
 
+        public Camera PlayerCamera => playerCamera;
+
+        /*
         [SerializeField]
         private string localPlayerLayerName = "LocalPlayer";
+        */
         [SerializeField]
         private string remotePlayerLayerName = "RemotePlayer";
 
