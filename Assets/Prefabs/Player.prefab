@@ -1078,7 +1078,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   playerCamera: {fileID: 9180396768530404281, guid: 1800d5e5eafd57b4595d5dffe6c52ed9, type: 3}
-  localPlayerLayerName: LocalPlayer
   remotePlayerLayerName: RemotePlayer
   componentsToDisable:
   - {fileID: 1426845098685010470}

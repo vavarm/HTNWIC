@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  weaponName: 
-  prefab: {fileID: 0}
-  physicalDamage: 0
+  weaponName: Sword
+  prefab: {fileID: 1965544642312197585, guid: 55b367d85c38cb947a80a7bdbddeca3d, type: 3}
+  type: 0
+  physicalDamage: 10
   magicalDamage: 0
   trueDamage: 0
