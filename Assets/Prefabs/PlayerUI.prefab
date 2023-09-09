@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionPanel: {fileID: 4763135787200266395}
+  interactionButton: {fileID: 5574151327349248270}
   interactionTextPlaceholder: {fileID: 5565606662806495806}
 --- !u!1 &4763135787200266395
 GameObject:

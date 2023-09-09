@@ -1,14 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using HTNWIC.Player;
 
 namespace HTNWIC.PlayerUI
 {
     public class PlayerUIManager : MonoBehaviour
     {
+        [Header("Interaction")]
         [SerializeField]
         private GameObject interactionPanel;
+        [SerializeField]
+        private Button interactionButton;
         [SerializeField]
         private TextMeshProUGUI interactionTextPlaceholder;
 
@@ -22,7 +25,10 @@ namespace HTNWIC.PlayerUI
 
         public void SetPlayer(GameObject player)
         {
+            // Set the player
             this.player = player;
+            // add a listener to the interaction button
+            interactionButton.onClick.AddListener(() => player.GetComponent<Interactor>().Interact());
         }
     }
 }

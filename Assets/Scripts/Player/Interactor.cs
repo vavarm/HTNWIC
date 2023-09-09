@@ -27,15 +27,21 @@ namespace HTNWIC.Player
         {
             if (context.performed)
             {
-                if (currentInteractionResult != null) {
-                    if (interactionResults[0].TryGetComponent(out IInteractable interactable))
-                    {
-                        interactable.Interact(gameObject);
-                    }
-                    else
-                    {
-                        Debug.Log("No interactable component found on " + interactionResults[0].name);
-                    }
+                Interact();
+            }
+        }
+
+        public void Interact()
+        {
+            if (currentInteractionResult != null)
+            {
+                if (interactionResults[0].TryGetComponent(out IInteractable interactable))
+                {
+                    interactable.Interact(gameObject);
+                }
+                else
+                {
+                    Debug.Log("No interactable component found on " + interactionResults[0].name);
                 }
             }
         }
