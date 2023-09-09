@@ -1,5 +1,5 @@
 {
-    "name": "ActionsAsset",
+    "name": "InputManager",
     "maps": [
         {
             "name": "Player",
@@ -27,6 +27,15 @@
                     "name": "Attack",
                     "type": "Button",
                     "id": "a57c107a-15e4-4bc6-af9e-ff1152b8bb22",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "3a4f2f7c-c041-42b6-bfa7-e7846fa373bf",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -136,11 +145,33 @@
                 {
                     "name": "",
                     "id": "8d068d0b-6e9b-4a92-9891-371a0e824c6d",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf080062-cabd-4af4-bf73-426a0da9ccc0",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "149186e9-29cf-4022-b1a9-e7cc4bc730bf",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

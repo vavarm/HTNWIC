@@ -14,6 +14,11 @@ namespace HTNWIC.Player
 
         public Camera PlayerCamera => playerCamera;
 
+        [SerializeField]
+        private GameObject playerUIPrefab;
+
+        public GameObject playerUIInstance { get; private set; }
+
         /*
         [SerializeField]
         private string localPlayerLayerName = "LocalPlayer";
@@ -45,6 +50,8 @@ namespace HTNWIC.Player
                 {
                     sceneCamera.gameObject.SetActive(false);
                 }
+                // Create PlayerUI
+                playerUIInstance = Instantiate(playerUIPrefab);
             }
         }
 
@@ -77,6 +84,11 @@ namespace HTNWIC.Player
             if (playerCamera != null)
             {
                 Destroy(playerCamera.gameObject);
+            }
+            // Destroy the player UI
+            if (playerUIInstance != null)
+            {
+                Destroy(playerUIInstance);
             }
         }
     }
