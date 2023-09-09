@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using HTNWIC.PlayerCamera;
+using HTNWIC.PlayerUI;
 
 namespace HTNWIC.Player
 {
@@ -52,6 +53,8 @@ namespace HTNWIC.Player
                 }
                 // Create PlayerUI
                 playerUIInstance = Instantiate(playerUIPrefab);
+                // Set the playerUI's player to this player
+                playerUIInstance.GetComponent<PlayerUIManager>().SetPlayer(gameObject);
             }
         }
 

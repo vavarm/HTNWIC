@@ -12,10 +12,17 @@ namespace HTNWIC.PlayerUI
         [SerializeField]
         private TextMeshProUGUI interactionTextPlaceholder;
 
+        private GameObject player;
+
         public void EnableInteractionPanel(bool isEnabled, string interactionText)
         {
             interactionPanel.SetActive(isEnabled);
             interactionTextPlaceholder.text = interactionText;
+        }
+
+        public void SetPlayer(GameObject player)
+        {
+            this.player = player;
         }
     }
 }
