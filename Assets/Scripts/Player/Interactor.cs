@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using HTNWIC.PlayerUI;
+using System.ComponentModel;
 
 namespace HTNWIC.Player
 {
@@ -17,6 +18,7 @@ namespace HTNWIC.Player
         private LayerMask interactionLayerMask;
 
         private Collider[] interactionResults = new Collider[10];
+        private Collider currentInteractionResult;
         private int interactionResultsCount;
 
         private PlayerSetup playerSetup;
@@ -25,7 +27,7 @@ namespace HTNWIC.Player
         {
             if (context.performed)
             {
-                if (interactionResults[0] != null) {
+                if (currentInteractionResult != null) {
                     if (interactionResults[0].TryGetComponent(out IInteractable interactable))
                     {
                         interactable.Interact(gameObject);
@@ -48,14 +50,20 @@ namespace HTNWIC.Player
             interactionResultsCount = Physics.OverlapSphereNonAlloc(interactionPoint.position, interactionRange, interactionResults, interactionLayerMask);
             if (interactionResultsCount > 0)
             {
-                if (interactionResults[0].TryGetComponent(out IInteractable interactable))
+                // reset the current interaction result if it's not the same as the first result
+                if(currentInteractionResult != null && currentInteractionResult != interactionResults[0])
+                    RemoveCurrentInteractableObject();
+                // set the new current interaction result
+                currentInteractionResult = interactionResults[0];
+                if (currentInteractionResult.TryGetComponent(out IInteractable interactable))
                 {
                     // Show interaction UI
                     if (playerSetup.playerUIInstance != null)
                     {
                         playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(true, interactable.InteractionPrompt);
                     }
-                    // TODO: enable UI around the object
+                    // enable FX on the object
+                    EnableCurrentInteractableObjectFX();
                 }
             }
             else
@@ -65,7 +73,8 @@ namespace HTNWIC.Player
                 {
                     playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(false, "");
                 }
-                // TODO: disable UI around the object
+                // disable FX on the object and reset the current interaction result
+                RemoveCurrentInteractableObject();
             }
         }
 
@@ -73,6 +82,42 @@ namespace HTNWIC.Player
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(interactionPoint.position, interactionRange);
+        }
+
+        private void EnableCurrentInteractableObjectFX()
+        {
+            if(currentInteractionResult != null && currentInteractionResult.TryGetComponent(out IInteractableFX component))
+            {
+                // modify the radius of the particle system to match the interaction range
+                ParticleSystem ps = component.InteractionFX.GetComponent<ParticleSystem>();
+                ParticleSystem.ShapeModule psShape = ps.shape;
+                psShape.radius = interactionRange;
+                // enable FX on the object
+                component.InteractionFX.gameObject.SetActive(true);
+            }
+            
+        }
+
+        private void RemoveCurrentInteractableObject()
+        {
+            if (currentInteractionResult != null && currentInteractionResult.TryGetComponent(out IInteractableFX component))
+            {
+                // disable FX on the object
+                component.InteractionFX.gameObject.SetActive(false);
+            }
+            // reset the current interaction result
+            currentInteractionResult = null;
+        }
+
+        private void OnDisable()
+        {
+            // Hide interaction UI
+            if (playerSetup.playerUIInstance != null)
+            {
+                playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(false, "");
+            }
+            // disable FX on the object and reset the current interaction result
+            RemoveCurrentInteractableObject();
         }
     }
 }

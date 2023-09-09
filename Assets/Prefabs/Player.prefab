@@ -1132,10 +1132,11 @@ MonoBehaviour:
   playerUIPrefab: {fileID: 3703956499579378656, guid: 5f7b50dfb5e787c40bc42b2c9e8ccd43, type: 3}
   remotePlayerLayerName: RemotePlayer
   componentsToDisable:
-  - {fileID: 1426845098685010470}
-  - {fileID: 5974855777274520148}
   - {fileID: 7856350589495838425}
   - {fileID: 4800260972314938882}
+  - {fileID: 1426845098685010470}
+  - {fileID: 3048040431104049754}
+  - {fileID: 5974855777274520148}
 --- !u!95 &9003984209833521404
 Animator:
   serializedVersion: 5
