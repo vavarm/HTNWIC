@@ -8,6 +8,7 @@ public class PickUpWeapon : NetworkBehaviour, IInteractable
 {
     [SerializeField]
     private Weapon weapon;
+    public Weapon Weapon => weapon;
 
     [SerializeField]
     private string interactionPrompt = "Pick up weapon";

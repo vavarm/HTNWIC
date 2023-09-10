@@ -14,13 +14,25 @@ namespace HTNWIC.PlayerUI
         private Button interactionButton;
         [SerializeField]
         private TextMeshProUGUI interactionTextPlaceholder;
+        [SerializeField]
+        private Image interactionIcon;
+        [SerializeField]
+        private Sprite defaultInteractionIcon;
 
         private GameObject player;
 
-        public void EnableInteractionPanel(bool isEnabled, string interactionText)
+        public void EnableInteractionPanel(bool isEnabled, string interactionText, Sprite interactionIconSprite)
         {
             interactionPanel.SetActive(isEnabled);
             interactionTextPlaceholder.text = interactionText;
+            if (interactionIconSprite == null)
+            {
+                interactionIcon.sprite = defaultInteractionIcon;
+            }
+            else
+            {
+                   interactionIcon.sprite = interactionIconSprite;
+            }
         }
 
         public void SetPlayer(GameObject player)

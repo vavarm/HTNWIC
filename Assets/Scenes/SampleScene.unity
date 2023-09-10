@@ -1101,6 +1101,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pickable_Sword (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1965544642312197585, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2158015018226861416, guid: d4903a2d52053754d9400ac749a56965, type: 3}
       propertyPath: m_IsActive
       value: 0

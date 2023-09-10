@@ -69,7 +69,12 @@ namespace HTNWIC.Player
                     // Show interaction UI
                     if (playerSetup.playerUIInstance != null)
                     {
-                        playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(true, interactable.InteractionPrompt);
+                        if(currentInteractionResult.TryGetComponent(out PickUpWeapon pickUpWeapon))
+                        {
+                            playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(true, interactable.InteractionPrompt, pickUpWeapon.Weapon.icon);
+                        }
+                        else
+                            playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(true, interactable.InteractionPrompt, null);
                     }
                     // enable FX on the object
                     EnableCurrentInteractableObjectFX();
@@ -80,7 +85,7 @@ namespace HTNWIC.Player
                 // Hide interaction UI
                 if (playerSetup.playerUIInstance != null)
                 {
-                    playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(false, "");
+                    playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(false, "", null);
                 }
                 // disable FX on the object and reset the current interaction result
                 RemoveCurrentInteractableObject();
@@ -119,7 +124,7 @@ namespace HTNWIC.Player
             // Hide interaction UI
             if (playerSetup.playerUIInstance != null)
             {
-                playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(false, "");
+                playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(false, "", null);
             }
             // disable FX on the object and reset the current interaction result
             RemoveCurrentInteractableObject();
