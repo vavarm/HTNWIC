@@ -13,7 +13,7 @@ namespace HTNWIC.Player
         [SerializeField]
         private Transform interactionPoint;
         [SerializeField]
-        private float interactionRange = 2f;
+        private float interactionRange;
         [SerializeField]
         private LayerMask interactionLayerMask;
 
@@ -49,11 +49,14 @@ namespace HTNWIC.Player
         void Start()
         {
             playerSetup = GetComponent<PlayerSetup>();
+            interactionRange = GameSettings.interactionRange;
         }
 
         void Update()
         {
             interactionResultsCount = Physics.OverlapSphereNonAlloc(interactionPoint.position, interactionRange, interactionResults, interactionLayerMask);
+            // order the results by distance to the interaction point (closest first) (if an object is null, it will be placed at the end of the array)
+            System.Array.Sort(interactionResults, (x, y) => (x == null ? 1 : (y == null ? -1 : (x.transform.position - interactionPoint.position).sqrMagnitude.CompareTo((y.transform.position - interactionPoint.position).sqrMagnitude))));
             if (interactionResultsCount > 0)
             {
                 // reset the current interaction result if it's not the same as the first result
@@ -94,10 +97,6 @@ namespace HTNWIC.Player
         {
             if(currentInteractionResult != null && currentInteractionResult.TryGetComponent(out IInteractableFX component))
             {
-                // modify the radius of the particle system to match the interaction range
-                ParticleSystem ps = component.InteractionFX.GetComponent<ParticleSystem>();
-                ParticleSystem.ShapeModule psShape = ps.shape;
-                psShape.radius = interactionRange;
                 // enable FX on the object
                 component.InteractionFX.gameObject.SetActive(true);
             }

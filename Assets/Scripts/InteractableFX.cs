@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 namespace HTNWIC {
@@ -15,6 +16,13 @@ namespace HTNWIC {
             {
                 Debug.LogError("No particle system assigned to " + gameObject.name);
             }
+        }
+
+        private void Start()
+        {
+            // modify the radius of the particle system to match the interaction range
+            ParticleSystem.ShapeModule psShape = InteractionFX.shape;
+            psShape.radius = GameSettings.interactionRange;
         }
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2856143398909214926}
   - component: {fileID: 20257402324481028}
   - component: {fileID: 4392040454110246205}
+  - component: {fileID: 362626494512093485}
   - component: {fileID: 6314028728464528145}
   - component: {fileID: 3093763608673579184}
   m_Layer: 8
@@ -107,7 +108,19 @@ MonoBehaviour:
   syncInterval: 0
   weapon: {fileID: 11400000, guid: eb35add50b4e6264a9336b4649484ea8, type: 2}
   interactionPrompt: Pick up weapon
-  interactionFX: {fileID: 2158015018226861416}
+--- !u!114 &362626494512093485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965544642312197585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd3b035655759849be43be5f54b45a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionFX: {fileID: 6235321797860833823}
 --- !u!114 &6314028728464528145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,14 +203,14 @@ ParticleSystem:
   m_GameObject: {fileID: 2158015018226861416}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 100
+  simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
