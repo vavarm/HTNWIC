@@ -100,20 +100,26 @@ namespace HTNWIC.Player
 
         private void EnableCurrentInteractableObjectFX()
         {
-            if(currentInteractionResult != null && currentInteractionResult.TryGetComponent(out IInteractableFX component))
+            if(currentInteractionResult != null && currentInteractionResult.TryGetComponent(out InteractableIndicator component))
             {
                 // enable FX on the object
-                component.InteractionFX.gameObject.SetActive(true);
+                if(component.InteractionIndicator.TryGetComponent(out MeshRenderer meshRenderer))
+                {
+                    meshRenderer.enabled = true;
+                }
             }
             
         }
 
         private void RemoveCurrentInteractableObject()
         {
-            if (currentInteractionResult != null && currentInteractionResult.TryGetComponent(out IInteractableFX component))
+            if (currentInteractionResult != null && currentInteractionResult.TryGetComponent(out InteractableIndicator component))
             {
                 // disable FX on the object
-                component.InteractionFX.gameObject.SetActive(false);
+                if (component.InteractionIndicator.TryGetComponent(out MeshRenderer meshRenderer))
+                {
+                    meshRenderer.enabled = false;
+                }
             }
             // reset the current interaction result
             currentInteractionResult = null;
