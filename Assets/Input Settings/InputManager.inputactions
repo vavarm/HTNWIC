@@ -1,5 +1,5 @@
 {
-    "name": "ActionsAsset",
+    "name": "InputManager",
     "maps": [
         {
             "name": "Player",
