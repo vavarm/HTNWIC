@@ -30,42 +30,48 @@ namespace HTNWIC.Player
 
         public void Update()
         {
-            if (!playerController.isMoving & weaponManager.CurrentWeapon == null)
+            if (!playerController.isMoving && weaponManager.CurrentWeapon == null)
             {
                 PlayIdleAnimation();
             }
-            else if (playerController.isMoving & weaponManager.CurrentWeapon == null)
+            else if (playerController.isMoving && weaponManager.CurrentWeapon == null)
             {
                 PlayRunAnimation();
             }
-            else if (!playerController.isMoving & weaponManager.CurrentWeapon != null)
+            else if (!playerController.isMoving && weaponManager.CurrentWeapon != null)
             {
                 PlayIdleOHAnimation();
             }
-            else if (playerController.isMoving & weaponManager.CurrentWeapon != null)
+            else if (playerController.isMoving && weaponManager.CurrentWeapon != null)
             {
                 PlayRunOHAnimation();
             }
         }
 
-        public void PlayRunAnimation()
+        private void PlayRunAnimation()
         {
             networkAnimator.SetTrigger("Run");
         }
 
-        public void PlayRunOHAnimation()
+        private void PlayRunOHAnimation()
         {
             networkAnimator.SetTrigger("RunOH");
         }
 
-        public void PlayIdleAnimation()
+        private void PlayIdleAnimation()
         {
             networkAnimator.SetTrigger("Idle");
         }
 
-        public void PlayIdleOHAnimation()
+        private void PlayIdleOHAnimation()
         {
             networkAnimator.SetTrigger("IdleOH");
+        }
+
+        public void PlayAttackOHAnimation()
+        {
+            Debug.Log("Send the animation trigger");
+            networkAnimator.SetTrigger("AttackOH");
         }
     }
 }

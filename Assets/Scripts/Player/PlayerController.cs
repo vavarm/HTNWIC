@@ -19,12 +19,22 @@ namespace HTNWIC.Player
 
         private Vector2 move;
 
-        public bool isMoving;
+        public bool isMoving { get; private set; } = false;
+
+        public bool isAttacking { get; private set; } = false;
 
         public void OnMove(InputAction.CallbackContext context)
         {
             move = context.ReadValue<Vector2>();
+        }
 
+        public void OnAttack(InputAction.CallbackContext context)
+        {
+            if(context.performed)
+            {
+                if (weaponManager.CurrentWeapon == null || isAttacking) return;
+                StartCoroutine(Attack());
+            }
         }
 
         private void Start()
@@ -53,8 +63,22 @@ namespace HTNWIC.Player
             {
                 isMoving = false;
             }
-
         }
 
+        IEnumerator Attack() {
+            isAttacking = true;
+            Debug.Log("Attack");
+            switch (weaponManager.CurrentWeapon.type)
+            {
+                case WeaponType.OneHanded:
+                    playerAnimations.PlayAttackOHAnimation();
+                    break;
+                default:
+                    goto case WeaponType.OneHanded;
+            }
+            yield return new WaitForSeconds(0.84f);
+            Debug.Log("End of Attack");
+            isAttacking = false;
+        }
     }
 }
