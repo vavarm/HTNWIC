@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using HTNWIC.Items;
 using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,12 +10,16 @@ namespace HTNWIC.Player
 {
     [RequireComponent(typeof(PlayerMotor))]
     [RequireComponent(typeof(PlayerAnimations))]
+    [RequireComponent(typeof(WeaponManager))]
     public class PlayerController : NetworkBehaviour
     {
         private PlayerMotor playerMotor;
         private PlayerAnimations playerAnimations;
+        private WeaponManager weaponManager;
 
         private Vector2 move;
+
+        public bool isMoving;
 
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -26,6 +32,7 @@ namespace HTNWIC.Player
             if (!isLocalPlayer) return;
             playerMotor = GetComponent<PlayerMotor>();
             playerAnimations = GetComponent<PlayerAnimations>();
+            weaponManager = GetComponent<WeaponManager>();
         }
 
         private void Update()
@@ -38,14 +45,15 @@ namespace HTNWIC.Player
 
             playerMotor.Rotate(movementDirection);
 
-            if (move == Vector2.zero)
+            if (move != Vector2.zero)
             {
-                playerAnimations.PlayIdleAnimation();
+                isMoving = true;
             }
             else
             {
-                playerAnimations.PlayRunAnimation();
+                isMoving = false;
             }
+
         }
 
     }

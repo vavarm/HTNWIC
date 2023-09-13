@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using HTNWIC.PlayerCamera;
+using HTNWIC.PlayerUI;
 
 namespace HTNWIC.Player
 {
@@ -13,6 +14,11 @@ namespace HTNWIC.Player
         private Camera sceneCamera;
 
         public Camera PlayerCamera => playerCamera;
+
+        [SerializeField]
+        private GameObject playerUIPrefab;
+
+        public GameObject playerUIInstance { get; private set; }
 
         /*
         [SerializeField]
@@ -45,6 +51,10 @@ namespace HTNWIC.Player
                 {
                     sceneCamera.gameObject.SetActive(false);
                 }
+                // Create PlayerUI
+                playerUIInstance = Instantiate(playerUIPrefab);
+                // Set the playerUI's player to this player
+                playerUIInstance.GetComponent<PlayerUIManager>().SetPlayer(gameObject);
             }
         }
 
@@ -77,6 +87,11 @@ namespace HTNWIC.Player
             if (playerCamera != null)
             {
                 Destroy(playerCamera.gameObject);
+            }
+            // Destroy the player UI
+            if (playerUIInstance != null)
+            {
+                Destroy(playerUIInstance);
             }
         }
     }
