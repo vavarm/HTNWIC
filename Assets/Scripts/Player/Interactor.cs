@@ -73,6 +73,10 @@ namespace HTNWIC.Player
                         {
                             playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(true, interactable.InteractionPrompt, pickUpWeapon.Weapon.icon);
                         }
+                        else if(currentInteractionResult.TryGetComponent(out PickUpGear pickUpGear))
+                        {
+                            playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(true, interactable.InteractionPrompt, pickUpGear.Gear.icon);
+                        }
                         else
                             playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(true, interactable.InteractionPrompt, null);
                     }
