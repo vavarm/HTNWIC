@@ -70,7 +70,6 @@ namespace HTNWIC.Player
 
         public void PlayAttackOHAnimation()
         {
-            Debug.Log("Send the animation trigger");
             networkAnimator.SetTrigger("AttackOH");
         }
     }

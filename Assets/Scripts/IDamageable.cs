@@ -7,6 +7,6 @@ namespace HTNWIC
     public interface IDamageable
     {
         public void TakeDamage(float amount);
-        // TODO: change the parameter to a struct or class
+        public void TakeDamage(DamageData damageData);
     }
 }
