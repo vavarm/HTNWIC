@@ -55,7 +55,7 @@ namespace HTNWIC.Player
             // setup attack point
             Debug.Log(attackPoint.position);
             // divide by 2 because the player has a scale of 0,5
-            attackPoint.SetPositionAndRotation(new Vector3(0f, 3f/2f, attackRange-1), Quaternion.identity);
+            attackPoint.SetPositionAndRotation(new Vector3(0f, 2f, attackRange-1), Quaternion.identity);
             Debug.Log(attackPoint.position);
         }
 
