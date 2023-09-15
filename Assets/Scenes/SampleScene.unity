@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -878,9 +878,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1309910065745853442, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1965544642312197585, guid: d4903a2d52053754d9400ac749a56965, type: 3}
       propertyPath: m_Name
       value: Pickable_Sword (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4105598579802390209, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5266014285890572295, guid: d4903a2d52053754d9400ac749a56965, type: 3}
       propertyPath: m_Mesh
@@ -1574,10 +1582,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1569344573}
-    - target: {fileID: 4821431063393466694, guid: 7b98085c63319f4488de0e44cf84b5fb, type: 3}
-      propertyPath: m_VersionIndex
-      value: 1018
-      objectReference: {fileID: 0}
     - target: {fileID: 4960317599874923040, guid: 7b98085c63319f4488de0e44cf84b5fb, type: 3}
       propertyPath: sceneId
       value: 302186326
