@@ -32,7 +32,7 @@ namespace HTNWIC.Dummy
             {
                 targetCamera = GameObject.FindGameObjectsWithTag("PlayerCamera")[0].transform;
             }
-            healthBarCanvas.transform.LookAt(transform.position + targetCamera.rotation * Vector3.forward, targetCamera.rotation * Vector3.up);
+            healthBarCanvas.transform.LookAt(healthBarCanvas.transform.position + targetCamera.rotation * Vector3.forward, targetCamera.rotation * Vector3.up);
         }
 
         [Server]
