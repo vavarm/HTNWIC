@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5608277426768283803}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,8 +43,7 @@ GameObject:
   - component: {fileID: 586921588506841897}
   - component: {fileID: 2302853984934709455}
   - component: {fileID: 8085503528498557227}
-  - component: {fileID: 8463363085929496493}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,29 +115,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8463363085929496493
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3299504829684974144}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4631527523293760183
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +126,7 @@ GameObject:
   - component: {fileID: 699446716496672022}
   - component: {fileID: 5170367285095228635}
   - component: {fileID: 4937197282874859270}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +201,7 @@ GameObject:
   - component: {fileID: 7637877358133578782}
   - component: {fileID: 2641639185540164306}
   - component: {fileID: 5635992340826097928}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +277,7 @@ GameObject:
   - component: {fileID: 2519204627458336927}
   - component: {fileID: 4529800657877015115}
   - component: {fileID: 6839275240297389962}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +380,7 @@ GameObject:
   - component: {fileID: 7130602282097982764}
   - component: {fileID: 6771216868342087622}
   - component: {fileID: 252123383502079743}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -481,7 +457,8 @@ GameObject:
   - component: {fileID: 4553173549260170452}
   - component: {fileID: 1245742410773945924}
   - component: {fileID: 1959609974460119867}
-  m_Layer: 0
+  - component: {fileID: 2390520603853077026}
+  m_Layer: 9
   m_Name: Dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,3 +569,26 @@ MonoBehaviour:
   syncInterval: 0
   healthBarCanvas: {fileID: 2519204627458336927}
   healthBar: {fileID: 5635992340826097928}
+--- !u!136 &2390520603853077026
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8599940315535696821}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
