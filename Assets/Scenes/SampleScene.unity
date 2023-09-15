@@ -1586,6 +1586,14 @@ PrefabInstance:
       propertyPath: sceneId
       value: 302186326
       objectReference: {fileID: 0}
+    - target: {fileID: 7175725794554869729, guid: 7b98085c63319f4488de0e44cf84b5fb, type: 3}
+      propertyPath: m_Height
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7175725794554869729, guid: 7b98085c63319f4488de0e44cf84b5fb, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1655,8 +1663,7 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1634995980}
-    m_RemovedComponents:
-    - {fileID: 5004571193204664570, guid: d4903a2d52053754d9400ac749a56965, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
