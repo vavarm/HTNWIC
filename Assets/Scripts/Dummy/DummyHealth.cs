@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using HTNWIC;
 using UnityEngine;
 using Mirror;
 
@@ -16,7 +13,7 @@ namespace HTNWIC.Dummy
         {
             base.Start();
             healthBar = GetComponent<DummyHealthBar>();
-            healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
+            healthBar.SetHealthBarValue(CurrentHealth, MaxHealth);
         }
 
         private void Update()
@@ -47,14 +44,6 @@ namespace HTNWIC.Dummy
         }
 
         [Server]
-        public override void TakeDamage(float amount)
-        {
-            base.TakeDamage(amount);
-            healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
-            if (CurrentHealth > 0) Debug.Log($"Dummy no.{gameObject.GetInstanceID()} has taken {amount} damage. He has {CurrentHealth} health left");
-        }
-
-        [Server]
         public override void TakeDamage(DamageData damageData)
         {
             // calculate total damage
@@ -68,7 +57,7 @@ namespace HTNWIC.Dummy
                 Die();
             }
             // update health bar
-            healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
+            healthBar.SetHealthBarValue(CurrentHealth, MaxHealth);
             // calculate lifesteal
             float lifesteal = totalDamage * damageData.LifeStealPercentage;
             // heal the attacker for the lifesteal amount
@@ -92,7 +81,7 @@ namespace HTNWIC.Dummy
         {
             currentHealth += amount;
             if (currentHealth > maxHealth) currentHealth = maxHealth;
-            healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
+            healthBar.SetHealthBarValue(CurrentHealth, MaxHealth);
             Debug.Log($"Dummy no.{gameObject.GetInstanceID()} has been healed for {amount} health. He has {CurrentHealth} health left");
         }
     }

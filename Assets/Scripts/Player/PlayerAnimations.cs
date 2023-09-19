@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using HTNWIC.Player;
 using Mirror;
 using UnityEngine;
 

@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using HTNWIC.PlayerCamera;
 using HTNWIC.PlayerUI;
+using HTNWIC.Utils;
 
 namespace HTNWIC.Player
 {
@@ -37,7 +36,7 @@ namespace HTNWIC.Player
                 // Disable all components that should only be active on the player that we control
                 DisableComponents();
                 // Assign the player to the remote player layer
-                AssignRemoteLayer(gameObject);
+                LayerUtils.SetLayerRecursively(gameObject, LayerMask.NameToLayer(remotePlayerLayerName));
             }
             else
             {
@@ -65,16 +64,6 @@ namespace HTNWIC.Player
                 component.enabled = false;
             }
         }
-
-        private void AssignRemoteLayer(GameObject obj)
-        {
-            obj.layer = LayerMask.NameToLayer(remotePlayerLayerName);
-            foreach (Transform child in obj.transform)
-            {
-                AssignRemoteLayer(child.gameObject);
-            }
-        }
-
         private void OnDisable()
         {
             if (!isLocalPlayer) return;
