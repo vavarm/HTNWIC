@@ -1,27 +1,28 @@
-using Mirror;
+using FishNet.Object;
 using UnityEngine;
 
 namespace HTNWIC.Player
 {
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(NetworkAnimator))]
+    [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(WeaponManager))]
     [RequireComponent(typeof(PlayerController))]
     public class PlayerAnimations : NetworkBehaviour
     {
-        private NetworkAnimator networkAnimator;
+        private Animator animator;
         private WeaponManager weaponManager;
         private PlayerController playerController;
 
-        private void Start()
+        public override void OnStartClient()
         {
-            if (!isLocalPlayer) return;
-            networkAnimator = GetComponent<NetworkAnimator>();
+            base.OnStartClient();
+            if (!base.IsOwner) return;
+            animator = GetComponent<Animator>();
             weaponManager = GetComponent<WeaponManager>();
             playerController = GetComponent<PlayerController>();
-            if (networkAnimator == null)
+            if (animator == null)
             {
-                Debug.LogError("NetworkAnimator component not found on this object");
+                Debug.LogError("animator component not found on this object");
             }
         }
 
@@ -47,27 +48,27 @@ namespace HTNWIC.Player
 
         private void PlayRunAnimation()
         {
-            networkAnimator.SetTrigger("Run");
+            animator.SetTrigger("Run");
         }
 
         private void PlayRunOHAnimation()
         {
-            networkAnimator.SetTrigger("RunOH");
+            animator.SetTrigger("RunOH");
         }
 
         private void PlayIdleAnimation()
         {
-            networkAnimator.SetTrigger("Idle");
+            animator.SetTrigger("Idle");
         }
 
         private void PlayIdleOHAnimation()
         {
-            networkAnimator.SetTrigger("IdleOH");
+            animator.SetTrigger("IdleOH");
         }
 
         public void PlayAttackOHAnimation()
         {
-            networkAnimator.SetTrigger("AttackOH");
+            animator.SetTrigger("AttackOH");
         }
     }
 }

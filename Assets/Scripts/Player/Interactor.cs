@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using HTNWIC.PlayerUI;
-using System.ComponentModel;
-using Component = UnityEngine.Component;
 
 namespace HTNWIC.Player
 {

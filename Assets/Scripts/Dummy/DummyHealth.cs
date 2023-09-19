@@ -1,5 +1,5 @@
 using UnityEngine;
-using Mirror;
+using FishNet.Object;
 
 namespace HTNWIC.Dummy
 {
@@ -9,16 +9,16 @@ namespace HTNWIC.Dummy
         [SerializeField]
         private DummyHealthBar healthBar;
 
-        protected override void Start()
+        public override void OnStartServer()
         {
-            base.Start();
+            base.OnStartServer();
             healthBar = GetComponent<DummyHealthBar>();
             healthBar.SetHealthBarValue(CurrentHealth, MaxHealth);
         }
 
         private void Update()
         {
-            if (isServer && Input.GetKeyDown(KeyCode.K))
+            if (base.IsServerOnly && Input.GetKeyDown(KeyCode.K))
             {
                 /* Old way to deal damage
                 TakeDamage(10f);

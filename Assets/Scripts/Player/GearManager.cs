@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using HTNWIC.Items;
-using Mirror;
+using FishNet.Object;
 using UnityEngine;
 
 namespace HTNWIC.Player
