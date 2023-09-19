@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using HTNWIC.PlayerUI;
 using System.ComponentModel;
+using Component = UnityEngine.Component;
 
 namespace HTNWIC.Player
 {
@@ -61,7 +62,7 @@ namespace HTNWIC.Player
             {
                 // reset the current interaction result if it's not the same as the first result
                 if(currentInteractionResult != null && currentInteractionResult != interactionResults[0])
-                    RemoveCurrentInteractableObject();
+                    DisableCurrentInteractableObjectFX();
                 // set the new current interaction result
                 currentInteractionResult = interactionResults[0];
                 if (currentInteractionResult.TryGetComponent(out IInteractable interactable))
@@ -92,7 +93,7 @@ namespace HTNWIC.Player
                     playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(false, "", null);
                 }
                 // disable FX on the object and reset the current interaction result
-                RemoveCurrentInteractableObject();
+                DisableCurrentInteractableObjectFX();
             }
         }
 
@@ -107,23 +108,17 @@ namespace HTNWIC.Player
             if(currentInteractionResult != null && currentInteractionResult.TryGetComponent(out InteractableIndicator component))
             {
                 // enable FX on the object
-                if(component.InteractionIndicator.TryGetComponent(out MeshRenderer meshRenderer))
-                {
-                    meshRenderer.enabled = true;
-                }
+                component.DisplayMeshRenderer(true);
             }
             
         }
 
-        private void RemoveCurrentInteractableObject()
+        private void DisableCurrentInteractableObjectFX()
         {
             if (currentInteractionResult != null && currentInteractionResult.TryGetComponent(out InteractableIndicator component))
             {
                 // disable FX on the object
-                if (component.InteractionIndicator.TryGetComponent(out MeshRenderer meshRenderer))
-                {
-                    meshRenderer.enabled = false;
-                }
+                component.DisplayMeshRenderer(false);
             }
             // reset the current interaction result
             currentInteractionResult = null;
@@ -137,7 +132,7 @@ namespace HTNWIC.Player
                 playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(false, "", null);
             }
             // disable FX on the object and reset the current interaction result
-            RemoveCurrentInteractableObject();
+            DisableCurrentInteractableObjectFX();
         }
     }
 }
