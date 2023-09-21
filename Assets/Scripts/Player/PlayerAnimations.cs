@@ -1,15 +1,17 @@
-using FishNet.Object;
 using UnityEngine;
+using FishNet.Object;
+using FishNet.Component.Animating;
 
 namespace HTNWIC.Player
 {
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(NetworkAnimator))]
     [RequireComponent(typeof(WeaponManager))]
     [RequireComponent(typeof(PlayerController))]
     public class PlayerAnimations : NetworkBehaviour
     {
         private Animator animator;
+        private NetworkAnimator networkAnimator;
         private WeaponManager weaponManager;
         private PlayerController playerController;
 
@@ -18,6 +20,7 @@ namespace HTNWIC.Player
             base.OnStartClient();
             if (!base.IsOwner) return;
             animator = GetComponent<Animator>();
+            networkAnimator = GetComponent<NetworkAnimator>();
             weaponManager = GetComponent<WeaponManager>();
             playerController = GetComponent<PlayerController>();
             if (animator == null)
@@ -48,27 +51,27 @@ namespace HTNWIC.Player
 
         private void PlayRunAnimation()
         {
-            animator.SetTrigger("Run");
+            networkAnimator.SetTrigger("Run");
         }
 
         private void PlayRunOHAnimation()
         {
-            animator.SetTrigger("RunOH");
+            networkAnimator.SetTrigger("RunOH");
         }
 
         private void PlayIdleAnimation()
         {
-            animator.SetTrigger("Idle");
+            networkAnimator.SetTrigger("Idle");
         }
 
         private void PlayIdleOHAnimation()
         {
-            animator.SetTrigger("IdleOH");
+            networkAnimator.SetTrigger("IdleOH");
         }
 
         public void PlayAttackOHAnimation()
         {
-            animator.SetTrigger("AttackOH");
+            networkAnimator.SetTrigger("AttackOH");
         }
     }
 }
