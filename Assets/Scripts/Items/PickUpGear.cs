@@ -1,8 +1,9 @@
+using FishNet.Managing.Logging;
 using HTNWIC;
 using HTNWIC.Items;
 using HTNWIC.Player;
 using UnityEngine;
-using Mirror;
+using FishNet.Object;
 
 public class PickUpGear : NetworkBehaviour, IInteractable
 {
@@ -19,7 +20,7 @@ public class PickUpGear : NetworkBehaviour, IInteractable
         CmdEquipGear(source);
     }
 
-    [Command(requiresAuthority = false)]
+    [ServerRpc(RequireOwnership = false)]
     private void CmdEquipGear(GameObject source)
     {
         // equip the gear on the server
@@ -38,10 +39,10 @@ public class PickUpGear : NetworkBehaviour, IInteractable
         // equip the Gear on all clients
         RpcEquipGear(source);
         // destroy this object on all instances
-        NetworkManager.Destroy(gameObject);
+        base.Despawn();
     }
 
-    [ClientRpc]
+    [ObserversRpc]
     private void RpcEquipGear(GameObject source)
     {
         if (source == null)

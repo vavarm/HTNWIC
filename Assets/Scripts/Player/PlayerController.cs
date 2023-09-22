@@ -1,6 +1,6 @@
 using System.Collections;
 using HTNWIC.Items;
-using Mirror;
+using FishNet.Object;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -58,7 +58,7 @@ namespace HTNWIC.Player
 
         private void Update()
         {
-            if (!isLocalPlayer) return;
+            if (!base.IsOwner) return;
             Vector3 movementDirection = new Vector3(move.x, 0f, move.y);
             movementDirection.Normalize();
 
@@ -105,7 +105,7 @@ namespace HTNWIC.Player
             yield return null;
         }
 
-        [Command]
+        [ServerRpc]
         public void CmdDealDamage(GameObject target, GameObject attacker)
         {
             if(weaponManager == null)

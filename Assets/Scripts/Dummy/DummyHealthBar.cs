@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
-using Mirror;
+using FishNet.Object;
+using FishNet.Object.Synchronizing;
 
 namespace HTNWIC.Dummy
 {
@@ -14,9 +12,9 @@ namespace HTNWIC.Dummy
 
         [SerializeField]
         private Image healthBar;
-        [SyncVar(hook = "UpdateHealthBar")]
+        [SyncVar(OnChange = nameof(UpdateHealthBar))]
         private float currentHealth;
-        [SyncVar(hook = "UpdateHealthBar")]
+        [SyncVar(OnChange = nameof(UpdateHealthBar))]
         private float maxHealth;
 
         private void Start()
@@ -46,7 +44,7 @@ namespace HTNWIC.Dummy
             this.maxHealth = maxHealth;
         }
 
-        private void UpdateHealthBar(float oldValue, float newValue)
+        private void UpdateHealthBar(float oldValue, float newValue, bool asServer)
         {
             healthBar.fillAmount = currentHealth / maxHealth;
         }
