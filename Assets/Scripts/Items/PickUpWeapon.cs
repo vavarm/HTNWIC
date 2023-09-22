@@ -35,26 +35,7 @@ public class PickUpWeapon : NetworkBehaviour, IInteractable
         }
         WeaponManager wm = source.GetComponent<WeaponManager>();
         wm.EquipWeapon(weapon);
-        // equip the weapon on all clients
-        RpcEquipWeapon(source);
         // destroy this object on all instances
         base.Despawn();
-    }
-
-    [ObserversRpc]
-    private void RpcEquipWeapon(GameObject source)
-    {
-        if (source == null)
-        {
-            Debug.LogError("PickUpWeapon: source is null");
-            return;
-        }
-        if (source.GetComponent<WeaponManager>() == null)
-        {
-            Debug.LogError("PickUpWeapon: source does not have WeaponManager");
-            return;
-        }
-        WeaponManager wm = source.GetComponent<WeaponManager>();
-        wm.EquipWeapon(weapon);
     }
 }

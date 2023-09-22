@@ -1,11 +1,15 @@
 using HTNWIC.Items;
 using FishNet.Object;
 using UnityEngine;
+using FishNet.Object.Synchronizing;
 
 namespace HTNWIC.Player
 {
     public class WeaponManager: NetworkBehaviour
     {
+        [SyncVar(OnChange = nameof(OnWeaponChange))]
+        private int currentWeaponIndex = -1;
+
         private Weapon currentWeapon;
         public Weapon CurrentWeapon => currentWeapon;
 
@@ -14,16 +18,26 @@ namespace HTNWIC.Player
         [SerializeField]
         private Transform weaponHolder;
 
+        [Server]
         public void EquipWeapon(Weapon weapon)
         {
-            // destroy previous weapon
+            currentWeaponIndex = GameData.Instance.GetWeaponIndexByName(weapon.name);
+        }
+
+        private void OnWeaponChange(int oldWeaponIndex, int newWeaponIndex, bool asServer)
+        {
+            if(newWeaponIndex < 0 || newWeaponIndex >= GameData.Instance.GetWeaponCount())
+            {
+                Debug.LogError("WeaponManager: newWeaponIndex out of range");
+                return;
+            }
             if (weaponInstance != null)
             {
                 Destroy(weaponInstance);
             }
-            // equip new weapon
-            currentWeapon = weapon;
-            weaponInstance = Instantiate(weapon.prefab, weaponHolder);
+            currentWeapon = GameData.Instance.GetWeapon(newWeaponIndex);
+            weaponInstance = Instantiate(currentWeapon.prefab, weaponHolder);
         }
+
     }
 }
