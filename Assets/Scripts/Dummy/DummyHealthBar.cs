@@ -13,9 +13,7 @@ namespace HTNWIC.Dummy
         [SerializeField]
         private Image healthBar;
         [SyncVar(OnChange = nameof(UpdateHealthBar))]
-        private float currentHealth;
-        [SyncVar(OnChange = nameof(UpdateHealthBar))]
-        private float maxHealth;
+        private float healthPercentage;
 
         private void Start()
         {
@@ -40,13 +38,14 @@ namespace HTNWIC.Dummy
         [Server]
         public void SetHealthBarValue(float currentHealth, float maxHealth)
         {
-            this.currentHealth = currentHealth;
-            this.maxHealth = maxHealth;
+            healthPercentage = currentHealth / maxHealth;
+            Debug.Log("SetHealthBarValue: " + healthPercentage);
         }
 
-        private void UpdateHealthBar(float oldValue, float newValue, bool asServer)
+        private void UpdateHealthBar(float oldHealthPercentage, float newHealthPercentage, bool asServer)
         {
-            healthBar.fillAmount = currentHealth / maxHealth;
+            healthBar.fillAmount = newHealthPercentage;
+            Debug.Log("UpdateHealthBar: " + newHealthPercentage);
         }
     }
 }

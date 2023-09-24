@@ -255,7 +255,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4b66f21097323d44ab40669b2fb9c53d, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 2d7f6e70ca2ae804399e0bb5705f6a21, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -494,9 +494,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5dd3111e9e4b042899791d7bbaaf0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 1762014374397776836}
+  _networkObjectCache: {fileID: 1762014374397776836}
   baseHealth: 100
   maxHealth: 0
   currentHealth: 0
@@ -513,11 +513,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2c2e92b854f1a41bd545bbb5dfa910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 1762014374397776836}
+  _networkObjectCache: {fileID: 1762014374397776836}
   healthBarCanvas: {fileID: 2519204627458336927}
   healthBar: {fileID: 5635992340826097928}
+  healthPercentage: 0
 --- !u!136 &2390520603853077026
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -553,7 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 0
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 1762014374397776836}
   _networkObjectCache: {fileID: 1762014374397776836}
   _componentConfiguration: 0
@@ -602,6 +603,8 @@ MonoBehaviour:
   <ComponentIndex>k__BackingField: 0
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours:
+  - {fileID: 1245742410773945924}
+  - {fileID: 1959609974460119867}
   - {fileID: 7763151495844240962}
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
