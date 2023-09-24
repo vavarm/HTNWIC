@@ -1,4 +1,3 @@
-using FishNet.Managing.Logging;
 using HTNWIC;
 using HTNWIC.Items;
 using HTNWIC.Player;
@@ -36,26 +35,7 @@ public class PickUpGear : NetworkBehaviour, IInteractable
         }
         GearManager gm = source.GetComponent<GearManager>();
         gm.EquipGear(gear);
-        // equip the Gear on all clients
-        RpcEquipGear(source);
         // destroy this object on all instances
         base.Despawn();
-    }
-
-    [ObserversRpc]
-    private void RpcEquipGear(GameObject source)
-    {
-        if (source == null)
-        {
-            Debug.LogError("PickUpGear: source is null");
-            return;
-        }
-        if (source.GetComponent<GearManager>() == null)
-        {
-            Debug.LogError("PickUpGear: source does not have GearManager");
-            return;
-        }
-        GearManager gm = source.GetComponent<GearManager>();
-        gm.EquipGear(gear);
     }
 }
