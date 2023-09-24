@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using HTNWIC.Player;
-using Mirror;
 using UnityEngine;
+using FishNet.Object;
+using FishNet.Component.Animating;
 
 namespace HTNWIC.Player
 {
@@ -12,19 +10,22 @@ namespace HTNWIC.Player
     [RequireComponent(typeof(PlayerController))]
     public class PlayerAnimations : NetworkBehaviour
     {
+        private Animator animator;
         private NetworkAnimator networkAnimator;
         private WeaponManager weaponManager;
         private PlayerController playerController;
 
-        private void Start()
+        public override void OnStartClient()
         {
-            if (!isLocalPlayer) return;
+            base.OnStartClient();
+            if (!base.IsOwner) return;
+            animator = GetComponent<Animator>();
             networkAnimator = GetComponent<NetworkAnimator>();
             weaponManager = GetComponent<WeaponManager>();
             playerController = GetComponent<PlayerController>();
-            if (networkAnimator == null)
+            if (animator == null)
             {
-                Debug.LogError("NetworkAnimator component not found on this object");
+                Debug.LogError("animator component not found on this object");
             }
         }
 

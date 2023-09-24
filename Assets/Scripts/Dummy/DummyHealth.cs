@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using HTNWIC;
 using UnityEngine;
-using Mirror;
+using FishNet.Object;
 
 namespace HTNWIC.Dummy
 {
@@ -12,16 +9,16 @@ namespace HTNWIC.Dummy
         [SerializeField]
         private DummyHealthBar healthBar;
 
-        protected override void Start()
+        public override void OnStartServer()
         {
-            base.Start();
+            base.OnStartServer();
             healthBar = GetComponent<DummyHealthBar>();
-            healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
+            healthBar.SetHealthBarValue(CurrentHealth, MaxHealth);
         }
 
         private void Update()
         {
-            if (isServer && Input.GetKeyDown(KeyCode.K))
+            if (base.IsServerOnly && Input.GetKeyDown(KeyCode.K))
             {
                 /* Old way to deal damage
                 TakeDamage(10f);
@@ -47,14 +44,6 @@ namespace HTNWIC.Dummy
         }
 
         [Server]
-        public override void TakeDamage(float amount)
-        {
-            base.TakeDamage(amount);
-            healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
-            if (CurrentHealth > 0) Debug.Log($"Dummy no.{gameObject.GetInstanceID()} has taken {amount} damage. He has {CurrentHealth} health left");
-        }
-
-        [Server]
         public override void TakeDamage(DamageData damageData)
         {
             // calculate total damage
@@ -68,7 +57,7 @@ namespace HTNWIC.Dummy
                 Die();
             }
             // update health bar
-            healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
+            healthBar.SetHealthBarValue(CurrentHealth, MaxHealth);
             // calculate lifesteal
             float lifesteal = totalDamage * damageData.LifeStealPercentage;
             // heal the attacker for the lifesteal amount
@@ -92,7 +81,7 @@ namespace HTNWIC.Dummy
         {
             currentHealth += amount;
             if (currentHealth > maxHealth) currentHealth = maxHealth;
-            healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
+            healthBar.SetHealthBarValue(CurrentHealth, MaxHealth);
             Debug.Log($"Dummy no.{gameObject.GetInstanceID()} has been healed for {amount} health. He has {CurrentHealth} health left");
         }
     }

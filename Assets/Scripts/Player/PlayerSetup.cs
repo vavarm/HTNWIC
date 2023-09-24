@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
+using FishNet.Object;
 using HTNWIC.PlayerCamera;
 using HTNWIC.PlayerUI;
+using HTNWIC.Utils;
 
 namespace HTNWIC.Player
 {
@@ -30,14 +29,15 @@ namespace HTNWIC.Player
         [SerializeField]
         private Behaviour[] componentsToDisable;
 
-        private void Start()
+        public override void OnStartClient()
         {
-            if (!isLocalPlayer)
+            base.OnStartClient();
+            if (!base.IsOwner)
             {
                 // Disable all components that should only be active on the player that we control
                 DisableComponents();
                 // Assign the player to the remote player layer
-                AssignRemoteLayer(gameObject);
+                LayerUtils.SetLayerRecursively(gameObject, LayerMask.NameToLayer(remotePlayerLayerName));
             }
             else
             {
@@ -58,6 +58,15 @@ namespace HTNWIC.Player
             }
         }
 
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+            // Disable all components that should only be active on the player that we control
+            DisableComponents();
+            // Assign the player to the remote player layer
+            LayerUtils.SetLayerRecursively(gameObject, LayerMask.NameToLayer(remotePlayerLayerName));
+        }
+
         private void DisableComponents()
         {
             foreach (Behaviour component in componentsToDisable)
@@ -65,19 +74,9 @@ namespace HTNWIC.Player
                 component.enabled = false;
             }
         }
-
-        private void AssignRemoteLayer(GameObject obj)
-        {
-            obj.layer = LayerMask.NameToLayer(remotePlayerLayerName);
-            foreach (Transform child in obj.transform)
-            {
-                AssignRemoteLayer(child.gameObject);
-            }
-        }
-
         private void OnDisable()
         {
-            if (!isLocalPlayer) return;
+            if (!base.IsOwner) return;
             // Re-enable the scene camera
             if (sceneCamera != null)
             {

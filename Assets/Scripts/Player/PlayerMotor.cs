@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Mirror;
+using FishNet.Object;
 using UnityEngine;
 
 namespace HTNWIC.Player
@@ -15,7 +13,6 @@ namespace HTNWIC.Player
 
         private void Start()
         {
-            if (!isLocalPlayer) return;
             rb = GetComponent<Rigidbody>();
         }
 

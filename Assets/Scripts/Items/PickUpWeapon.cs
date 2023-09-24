@@ -2,7 +2,7 @@ using HTNWIC;
 using HTNWIC.Items;
 using HTNWIC.Player;
 using UnityEngine;
-using Mirror;
+using FishNet.Object;
 
 public class PickUpWeapon : NetworkBehaviour, IInteractable
 {
@@ -19,7 +19,7 @@ public class PickUpWeapon : NetworkBehaviour, IInteractable
         CmdEquipWeapon(source);
     }
 
-    [Command(requiresAuthority = false)]
+    [ServerRpc(RequireOwnership = false)]
     private void CmdEquipWeapon(GameObject source)
     {
         // equip the weapon on the server
@@ -38,10 +38,10 @@ public class PickUpWeapon : NetworkBehaviour, IInteractable
         // equip the weapon on all clients
         RpcEquipWeapon(source);
         // destroy this object on all instances
-        NetworkManager.Destroy(gameObject);
+        base.Despawn();
     }
 
-    [ClientRpc]
+    [ObserversRpc]
     private void RpcEquipWeapon(GameObject source)
     {
         if (source == null)

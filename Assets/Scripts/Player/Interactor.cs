@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using HTNWIC.PlayerUI;
-using System.ComponentModel;
+using FishNet.Object;
 
 namespace HTNWIC.Player
 {
     [RequireComponent(typeof(PlayerSetup))]
-    public class Interactor : MonoBehaviour
+    public class Interactor : NetworkBehaviour
     {
         [SerializeField]
         private Transform interactionPoint;
@@ -25,6 +23,7 @@ namespace HTNWIC.Player
 
         public void OnInteract(InputAction.CallbackContext context)
         {
+            if (!base.IsOwner) return;
             if (context.performed)
             {
                 Interact();
@@ -54,6 +53,7 @@ namespace HTNWIC.Player
 
         void Update()
         {
+            if (!base.IsOwner) return;
             interactionResultsCount = Physics.OverlapSphereNonAlloc(interactionPoint.position, interactionRange, interactionResults, interactionLayerMask);
             // order the results by distance to the interaction point (closest first) (if an object is null, it will be placed at the end of the array)
             System.Array.Sort(interactionResults, (x, y) => (x == null ? 1 : (y == null ? -1 : (x.transform.position - interactionPoint.position).sqrMagnitude.CompareTo((y.transform.position - interactionPoint.position).sqrMagnitude))));
@@ -61,7 +61,7 @@ namespace HTNWIC.Player
             {
                 // reset the current interaction result if it's not the same as the first result
                 if(currentInteractionResult != null && currentInteractionResult != interactionResults[0])
-                    RemoveCurrentInteractableObject();
+                    DisableCurrentInteractableObjectFX();
                 // set the new current interaction result
                 currentInteractionResult = interactionResults[0];
                 if (currentInteractionResult.TryGetComponent(out IInteractable interactable))
@@ -92,7 +92,7 @@ namespace HTNWIC.Player
                     playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(false, "", null);
                 }
                 // disable FX on the object and reset the current interaction result
-                RemoveCurrentInteractableObject();
+                DisableCurrentInteractableObjectFX();
             }
         }
 
@@ -107,23 +107,17 @@ namespace HTNWIC.Player
             if(currentInteractionResult != null && currentInteractionResult.TryGetComponent(out InteractableIndicator component))
             {
                 // enable FX on the object
-                if(component.InteractionIndicator.TryGetComponent(out MeshRenderer meshRenderer))
-                {
-                    meshRenderer.enabled = true;
-                }
+                component.DisplayMeshRenderer(true);
             }
             
         }
 
-        private void RemoveCurrentInteractableObject()
+        private void DisableCurrentInteractableObjectFX()
         {
             if (currentInteractionResult != null && currentInteractionResult.TryGetComponent(out InteractableIndicator component))
             {
                 // disable FX on the object
-                if (component.InteractionIndicator.TryGetComponent(out MeshRenderer meshRenderer))
-                {
-                    meshRenderer.enabled = false;
-                }
+                component.DisplayMeshRenderer(false);
             }
             // reset the current interaction result
             currentInteractionResult = null;
@@ -131,13 +125,14 @@ namespace HTNWIC.Player
 
         private void OnDisable()
         {
+            if(!base.IsOwner) return;
             // Hide interaction UI
             if (playerSetup.playerUIInstance != null)
             {
                 playerSetup.playerUIInstance.GetComponent<PlayerUIManager>().EnableInteractionPanel(false, "", null);
             }
             // disable FX on the object and reset the current interaction result
-            RemoveCurrentInteractableObject();
+            DisableCurrentInteractableObjectFX();
         }
     }
 }

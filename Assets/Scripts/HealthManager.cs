@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Mirror;
-using Unity.IO.LowLevel.Unsafe;
+using FishNet.Object;
+using FishNet.Object.Synchronizing;
 using UnityEngine;
 
 namespace HTNWIC
@@ -23,25 +21,16 @@ namespace HTNWIC
 
         public float CurrentHealth => currentHealth;
 
-        protected virtual void Start()
+        public override void OnStartServer()
         {
+            base.OnStartServer();
             maxHealth = baseHealth;
             currentHealth = maxHealth;
         }
-
-        [Server]
-        public virtual void TakeDamage(float amount)
-        {
-            currentHealth -= amount;
-            if (currentHealth <= 0)
-            {
-                currentHealth = 0;
-                Die();
-            }
-        }
-
+        
         public abstract void TakeDamage(DamageData damageData);
 
+        [Server]
         public virtual void Heal(float amount)
         {
             currentHealth += amount;
