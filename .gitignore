@@ -74,3 +74,6 @@ crashlytics-build.properties
 
 # Plastic / Unity DevOps folder
 .plastic
+
+
+.idea

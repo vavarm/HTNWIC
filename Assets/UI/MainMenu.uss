@@ -1,0 +1,45 @@
+.menu-button {
+    font-size: 20px;
+    -unity-font: url('project://database/Assets/Imports/Fonts/MainFont.ttf?fileID=12800000&guid=02bb03a8baec3224aab821fa8f5e4c34&type=3#MainFont');
+    -unity-font-definition: url('project://database/Assets/Imports/Fonts/MainFont%20SDF.asset?fileID=11400000&guid=bc74a73c86920cc4eacf78e21d4ec76a&type=2#MainFont SDF');
+    color: rgb(197, 78, 78);
+    -unity-text-align: middle-center;
+    white-space: normal;
+    text-overflow: clip;
+    -unity-font-style: normal;
+    background-color: rgba(197, 78, 78, 0.2);
+    border-left-color: rgba(56, 56, 56, 0);
+    border-right-color: rgba(56, 56, 56, 0);
+    border-top-color: rgba(56, 56, 56, 0);
+    border-bottom-color: rgba(56, 56, 56, 0);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    max-width: 75%;
+    transition-duration: 0.2s;
+}
+
+.menu-button:hover {
+    font-size: 30px;
+    -unity-font: url('project://database/Assets/Imports/Fonts/MainFont.ttf?fileID=12800000&guid=02bb03a8baec3224aab821fa8f5e4c34&type=3#MainFont');
+    -unity-font-definition: url('project://database/Assets/Imports/Fonts/MainFont%20SDF.asset?fileID=11400000&guid=bc74a73c86920cc4eacf78e21d4ec76a&type=2#MainFont SDF');
+    color: rgb(197, 78, 78);
+    -unity-text-align: middle-center;
+    white-space: normal;
+    text-overflow: clip;
+    -unity-font-style: normal;
+    background-color: rgba(197, 78, 78, 0.2);
+    border-left-color: rgba(56, 56, 56, 0);
+    border-right-color: rgba(56, 56, 56, 0);
+    border-top-color: rgba(56, 56, 56, 0);
+    border-bottom-color: rgba(56, 56, 56, 0);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    rotate: -10deg;
+    max-width: 120%;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+}
