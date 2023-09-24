@@ -34,7 +34,13 @@ namespace HTNWIC
 
         public Gear GetGear(int index)
         {
+            Debug.Log("GameData: GetGear: " + gears[index].name);
             return gears[index];
+        }
+        
+        public int GetGearCount()
+        {
+            return gears.Length;
         }
 
         public int GetWeaponIndexByName(string name)
@@ -43,6 +49,7 @@ namespace HTNWIC
             {
                 if (weapons[i].name == name)
                 {
+                    Debug.Log("GameData: GetWeaponIndexByName: " + name + " found at index " + i);
                     return i;
                 }
             }
