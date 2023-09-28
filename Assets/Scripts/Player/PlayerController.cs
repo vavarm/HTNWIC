@@ -1,6 +1,7 @@
 using System.Collections;
 using HTNWIC.Items;
 using FishNet.Object;
+using FishNet.Object.Synchronizing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,8 +13,8 @@ namespace HTNWIC.Player
     public class PlayerController : NetworkBehaviour
     {
         private PlayerMotor playerMotor;
-        private PlayerAnimations playerAnimations;
         private WeaponManager weaponManager;
+        private PlayerAnimations playerAnimations;
 
         private Vector2 move;
 
@@ -26,16 +27,21 @@ namespace HTNWIC.Player
         [SerializeField]
         private LayerMask damageableLayer;
 
-        public bool isMoving { get; private set; } = false;
-        public bool isAttacking { get; private set; } = false;
-
+        [field: SyncVar(OnChange = nameof(OnIsMovingChange))]
+        public bool isMoving { get; [ServerRpc] set; } = false;
+        
+        [field: SyncVar(OnChange = nameof(OnIsAttackingChange))]
+        public bool isAttacking { get; [ServerRpc] set; } = false;
+        
         public void OnMove(InputAction.CallbackContext context)
         {
+            if(!base.IsOwner) return;
             move = context.ReadValue<Vector2>();
         }
 
         public void OnAttack(InputAction.CallbackContext context)
         {
+            if(!base.IsOwner) return;
             if(context.performed)
             {
                 if (weaponManager.CurrentWeapon == null || isAttacking) return;
@@ -48,28 +54,25 @@ namespace HTNWIC.Player
             base.OnStartServer();
             // get components
             playerMotor = GetComponent<PlayerMotor>();
-            playerAnimations = GetComponent<PlayerAnimations>();
             weaponManager = GetComponent<WeaponManager>();
+            playerAnimations = GetComponent<PlayerAnimations>();
             // setup attack point
-            Debug.Log(attackPoint.position);
             // divide by 2 because the player has a scale of 0,5
             attackPoint.SetPositionAndRotation(new Vector3(0f, 2f, attackRange-1), Quaternion.identity);
-            Debug.Log(attackPoint.position);
         }
 
         public override void OnStartClient()
         {
             base.OnStartClient();
-            // get components
-            playerMotor = GetComponent<PlayerMotor>();
-            playerAnimations = GetComponent<PlayerAnimations>();
-            weaponManager = GetComponent<WeaponManager>();
             // setup attack point
-            Debug.Log(attackPoint.position);
             // divide by 2 because the player has a scale of 0,5
             attackPoint.SetPositionAndRotation(new Vector3(0f, 2f, attackRange - 1), Quaternion.identity);
-            Debug.Log(attackPoint.position);
-        }
+            playerAnimations = GetComponent<PlayerAnimations>();
+            weaponManager = GetComponent<WeaponManager>();
+            if(!base.IsOwner) return;
+            // get components
+            playerMotor = GetComponent<PlayerMotor>();
+           }
 
         private void Update()
         {
@@ -80,7 +83,7 @@ namespace HTNWIC.Player
             playerMotor.Move(movementDirection);
 
             playerMotor.Rotate(movementDirection);
-
+            
             if (move != Vector2.zero)
             {
                 isMoving = true;
@@ -91,16 +94,29 @@ namespace HTNWIC.Player
             }
         }
 
+        private void OnIsMovingChange(bool oldIsMoving, bool newIsMoving, bool asServer)
+        {
+            playerAnimations.isMovingAnimation = newIsMoving;
+        }
+        
+        private void OnIsAttackingChange(bool oldIsAttacking, bool newIsAttacking, bool asServer)
+        {
+            Debug.Log("OnIsAttackingChange: " + newIsAttacking);
+            if (newIsAttacking)
+            {
+                switch (weaponManager.CurrentWeapon.type)
+                {
+                    case WeaponType.OneHanded:
+                        playerAnimations.PlayAttackOHAnimation();
+                        break;
+                    default:
+                        goto case WeaponType.OneHanded;
+                }
+            }
+        }
+
         IEnumerator Attack() {
             isAttacking = true;
-            switch (weaponManager.CurrentWeapon.type)
-            {
-                case WeaponType.OneHanded:
-                    playerAnimations.PlayAttackOHAnimation();
-                    break;
-                default:
-                    goto case WeaponType.OneHanded;
-            }
             // deal damage
             Collider[] damageableHited = new Collider[10];
             Physics.OverlapSphereNonAlloc(attackPoint.position, attackRange, damageableHited, damageableLayer);

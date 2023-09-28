@@ -1,32 +1,35 @@
 using UnityEngine;
 using FishNet.Object;
-using FishNet.Component.Animating;
+using HTNWIC.Items;
 
 namespace HTNWIC.Player
 {
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(NetworkAnimator))]
     [RequireComponent(typeof(WeaponManager))]
     [RequireComponent(typeof(PlayerController))]
     public class PlayerAnimations : NetworkBehaviour
     {
         private Animator animator;
-        private NetworkAnimator networkAnimator;
         private WeaponManager weaponManager;
         private PlayerController playerController;
 
+        public bool isMovingAnimation = false;
+        public bool isAttackingAnimation = false;
+        
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+            animator = GetComponent<Animator>();
+            weaponManager = GetComponent<WeaponManager>();
+            playerController = GetComponent<PlayerController>();
+        }
+        
         public override void OnStartClient()
         {
             base.OnStartClient();
-            if (!base.IsOwner) return;
             animator = GetComponent<Animator>();
-            networkAnimator = GetComponent<NetworkAnimator>();
             weaponManager = GetComponent<WeaponManager>();
             playerController = GetComponent<PlayerController>();
-            if (animator == null)
-            {
-                Debug.LogError("animator component not found on this object");
-            }
         }
 
         public void Update()
@@ -51,27 +54,27 @@ namespace HTNWIC.Player
 
         private void PlayRunAnimation()
         {
-            networkAnimator.SetTrigger("Run");
+            animator.SetTrigger("Run");
         }
 
         private void PlayRunOHAnimation()
         {
-            networkAnimator.SetTrigger("RunOH");
+            animator.SetTrigger("RunOH");
         }
 
         private void PlayIdleAnimation()
         {
-            networkAnimator.SetTrigger("Idle");
+            animator.SetTrigger("Idle");
         }
 
         private void PlayIdleOHAnimation()
         {
-            networkAnimator.SetTrigger("IdleOH");
+            animator.SetTrigger("IdleOH");
         }
 
         public void PlayAttackOHAnimation()
         {
-            networkAnimator.SetTrigger("AttackOH");
+            animator.SetTrigger("AttackOH");
         }
     }
 }
