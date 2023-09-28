@@ -10,6 +10,7 @@ namespace HTNWIC.AI
         // Update is called once per frame
         void Update()
         {
+            if(!base.IsServer) return;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 currentWaypoint = GetRandomPositionInPieSlice();

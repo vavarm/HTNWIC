@@ -1,9 +1,9 @@
-using UnityEditor;
 using UnityEngine;
+using FishNet.Object;
 
 namespace HTNWIC.AI
 {
-    public abstract class AIController : MonoBehaviour
+    public abstract class AIController : NetworkBehaviour
     {
         [Header("Move Cone Settings")]
         [SerializeField]
