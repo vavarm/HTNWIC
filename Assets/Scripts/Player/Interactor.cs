@@ -96,7 +96,7 @@ namespace HTNWIC.Player
             }
         }
 
-        void OnDrawGizmos()
+        void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(interactionPoint.position, interactionRange);
