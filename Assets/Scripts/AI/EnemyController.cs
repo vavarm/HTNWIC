@@ -55,6 +55,11 @@ namespace HTNWIC.AI
                     State = EnemyState.Patrol;
                     break;
                 case EnemyState.Sit:
+                    // If we have no player to chase, find a new player to chase
+                    if (playerChased == null)
+                    {
+                        FindNewPlayerToChase();
+                    }
                     break;
                 case EnemyState.Patrol:
                     // If we have no player to chase, find a new player to chase
@@ -64,7 +69,7 @@ namespace HTNWIC.AI
                     }
                     if (navMeshAgent.destination == null || (Vector3.Distance(transform.position, navMeshAgent.destination) < 2f))
                     {
-                        if (Random.Range(0, 100) < 90)
+                        if (Random.Range(0, 100) < 50)
                         {
                             SetupAIToPatrol();
                         }
@@ -94,7 +99,7 @@ namespace HTNWIC.AI
         IEnumerator Sit()
         {
             navMeshAgent.isStopped = true;
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(Random.Range(10f, 40f));
             navMeshAgent.isStopped = false;
             SetupAIToPatrol();
         }
@@ -105,7 +110,7 @@ namespace HTNWIC.AI
             if (colliders.Length > 0 && navMeshAgent.CalculatePath(colliders[0].gameObject.transform.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
             {
                 SetupAIToChase(colliders[0].gameObject);
-            } else if (State != EnemyState.Patrol)
+            } else if (State == EnemyState.Chase)
             {
                 SetupAIToPatrol();
             }
@@ -113,12 +118,14 @@ namespace HTNWIC.AI
 
         private void SetupAIToPatrol()
         {
+            StopCoroutine(Sit());
             playerChased = null;
             navMeshAgent.speed = patrolSpeed;
             navMeshAgent.angularSpeed = patrolAngularSpeed;
             State = EnemyState.Patrol;
             currentWaypoint = GetRandomPositionInPieSlice();
             navMeshAgent.SetDestination(currentWaypoint);
+            navMeshAgent.isStopped = false;
         }
 
         private void SetupAIToChase(GameObject _chasedPlayer)
@@ -133,10 +140,13 @@ namespace HTNWIC.AI
             {
                 return;
             }
+            StopCoroutine(Sit());
             playerChased = _chasedPlayer;
             navMeshAgent.speed = chaseSpeed;
             navMeshAgent.angularSpeed = chaseAngularSpeed;
             State = EnemyState.Chase;
+            navMeshAgent.SetDestination(playerChased.transform.position);
+            navMeshAgent.isStopped = false;
         }
 
         private void OnDrawGizmosSelected()
